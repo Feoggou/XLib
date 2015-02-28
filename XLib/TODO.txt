@@ -7,7 +7,6 @@
 - CMake files do not currently know about Windows or Linux files.
 - #define THROW_IF_FALSE / WIN_THROW
 - dir: name not path
-- refactor CMake files
 
 LATER ON:
 - classes Exception (abstract?)
