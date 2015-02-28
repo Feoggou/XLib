@@ -18,5 +18,7 @@ namespace Zen
 		// If there is an error, an exception is thrown. If the directory is removed, it returns true.
 		static bool Remove(const std::wstring& path);
 		static bool Exists(const std::wstring& path);
+
+		static std::wstring GetCurrent();
 	};
 }

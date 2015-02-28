@@ -37,7 +37,7 @@ bool Dir::Remove(const std::wstring& path)
 	return OS(Dir)::Remove(path);
 }
 
-std::wstring Dir::Name() const
+std::wstring Dir::FullPath() const
 {
 	//TODO: name, not path
 	return m_path;
@@ -61,4 +61,10 @@ bool Dir::Create()
 bool Dir::Remove()
 {
 	return Dir::Remove(m_path);
+}
+
+Dir Dir::GetCurrent()
+{
+	std::wstring path = OS(Dir)::GetCurrent();
+	return Dir(path);
 }

@@ -1,5 +1,7 @@
 #include "XWin.h"
 
+#include <cassert>
+
 #include "WinDir.h"
 #include "FSException.h"
 
@@ -62,4 +64,23 @@ bool WinDir::Remove(const std::wstring& path)
 	}
 
 	return true;
+}
+
+std::wstring WinDir::GetCurrent()
+{
+	DWORD nCount = GetCurrentDirectoryW(0, NULL);
+	if (!nCount) { throw FSException(GetLastError()); }
+
+	std::wstring dirPath;
+	dirPath.resize(nCount);
+	wchar_t* data = const_cast<wchar_t*>(dirPath.data());
+
+	DWORD result = GetCurrentDirectoryW(nCount, data);
+	if (!result) { throw FSException(GetLastError()); }
+
+	// the return value - result - specifies the number of characters that are written to the buffer,
+	// NOT including the terminating null character, unlike nCount.
+	assert(result + 1 == nCount);
+
+	return dirPath;
 }

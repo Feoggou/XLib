@@ -12,7 +12,7 @@ TEST(EmptyDir, CreateDir)
 
 	ASSERT_FALSE(Dir::Exists(name));
 	ASSERT_NO_THROW(dir = Dir::Create(name));
-	ASSERT_STREQ(name.data(), dir.Name().data());
+	ASSERT_STREQ(name.data(), dir.FullPath().data());
 	ASSERT_TRUE(dir.Exists());
 	ASSERT_TRUE(Dir::Exists(name));
 	ASSERT_TRUE(dir.Remove());
@@ -42,6 +42,12 @@ TEST(EmptyDir, RemoveDirTwice)
 	ASSERT_FALSE(dir.Exists());
 	ASSERT_FALSE(dir.Remove());
 	ASSERT_FALSE(dir.Exists());
+}
+
+TEST(EmptyDir, GetCurrentDir)
+{
+	Dir dir = Dir::GetCurrent();
+	ASSERT_GT(dir.FullPath().size(), 1UL);
 }
 
 //TODO: FixEmptyDir, CreateDir of invalid path
