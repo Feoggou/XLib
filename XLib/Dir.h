@@ -7,10 +7,15 @@ namespace Zen
 	class Dir
 	{
 	public:
-		Dir() {}
-		Dir(const std::wstring& path) : m_path(path) {}
+		Dir() = default;
+		Dir(Dir&& other);
+		explicit Dir(const std::wstring& path) : m_path(path) {}
+
+		Dir& operator=(Dir&& other);
 
 		bool Exists() const;
+		void Create();
+		void Remove();
 		std::wstring Name() const;
 
 	public:

@@ -1,14 +1,40 @@
 #include "Dir.h"
+#include "XLib.h"
+
+#ifdef WIN32
+#include "WinDir.h"
+#else
+#error NOT IMPLEMENTED!
+#endif
 
 using namespace Zen;
 
+Dir::Dir(Dir&& other)
+	: m_path(std::move(other.m_path))
+{
+}
+
+Dir& Dir::operator=(Dir&& other)
+{
+	if (this == &other)
+		return *this;
+
+	 m_path = std::move(other.m_path);
+
+	return *this;
+}
+
 Dir Dir::Create(const std::wstring& path)
 {
-	return Dir(path);
+	Dir dir(path);
+	dir.Create();
+
+	return dir;
 }
 
 void Dir::Remove(const std::wstring& path)
 {
+	OS(Dir)::Remove(path);
 }
 
 std::wstring Dir::Name() const
@@ -24,5 +50,15 @@ bool Dir::Exists() const
 
 bool Dir::Exists(const std::wstring& path)
 {
-	return true;
+	return OS(Dir)::Exists(path);
+}
+
+void Dir::Create()
+{
+	OS(Dir)::Create(m_path);
+}
+
+void Dir::Remove()
+{
+	Dir::Remove(m_path);
 }
