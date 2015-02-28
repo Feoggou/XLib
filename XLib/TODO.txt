@@ -1,0 +1,14 @@
+- create dir twice;
+- remove dir twice;
+- create directory of path (not only name)
+- invalid paths + \\?\
+- paths: change / to \\ or vice versa
+
+- CMake files do not currently know about Windows or Linux files.
+- #define THROW_IF_FALSE / WIN_THROW
+- dir: name not path
+
+LATER ON:
+- classes Exception (abstract?)
+- Logging in Exception
+- Logs require File and more advanced Dir functionality
