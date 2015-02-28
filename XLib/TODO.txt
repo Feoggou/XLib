@@ -1,4 +1,3 @@
-- remove dir twice;
 - create directory of path (not only name)
 - invalid paths + \\?\
 - paths: change / to \\ or vice versa

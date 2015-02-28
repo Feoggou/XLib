@@ -15,7 +15,7 @@ TEST(EmptyDir, CreateDir)
 	ASSERT_STREQ(name.data(), dir.Name().data());
 	ASSERT_TRUE(dir.Exists());
 	ASSERT_TRUE(Dir::Exists(name));
-	ASSERT_NO_THROW(dir.Remove());
+	ASSERT_TRUE(dir.Remove());
 	ASSERT_FALSE(dir.Exists());
 }
 
@@ -27,7 +27,20 @@ TEST(EmptyDir, CreateDirTwice)
 	ASSERT_TRUE(dir.Create());
 	ASSERT_TRUE(dir.Exists());
 	ASSERT_FALSE(dir.Create());
-	ASSERT_NO_THROW(dir.Remove());
+	ASSERT_TRUE(dir.Remove());
+	ASSERT_FALSE(dir.Exists());
+}
+
+TEST(EmptyDir, RemoveDirTwice)
+{
+	Dir dir(L"temp3");
+
+	ASSERT_FALSE(dir.Exists());
+	ASSERT_TRUE(dir.Create());
+	ASSERT_TRUE(dir.Exists());
+	ASSERT_TRUE(dir.Remove());
+	ASSERT_FALSE(dir.Exists());
+	ASSERT_FALSE(dir.Remove());
 	ASSERT_FALSE(dir.Exists());
 }
 

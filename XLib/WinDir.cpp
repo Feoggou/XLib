@@ -47,11 +47,19 @@ bool WinDir::Create(const std::wstring& path)
 	return true;
 }
 
-void WinDir::Remove(const std::wstring& path)
+bool WinDir::Remove(const std::wstring& path)
 {
 	BOOL ok = RemoveDirectoryW(path.data());
 	if (!ok)
 	{
+		DWORD error = GetLastError();
+		if (error == ERROR_FILE_NOT_FOUND)
+		{
+			return false;
+		}
+
 		throw FSException(GetLastError());
 	}
+
+	return true;
 }

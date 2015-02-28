@@ -15,12 +15,12 @@ namespace Zen
 
 		bool Exists() const;
 		bool Create();
-		void Remove();
+		bool Remove();
 		std::wstring Name() const;
 
 	public:
 		static Dir Create(const std::wstring& path);
-		static void Remove(const std::wstring& path);
+		static bool Remove(const std::wstring& path);
 		static bool Exists(const std::wstring& path);
 
 	private:

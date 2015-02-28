@@ -32,9 +32,9 @@ Dir Dir::Create(const std::wstring& path)
 	return dir;
 }
 
-void Dir::Remove(const std::wstring& path)
+bool Dir::Remove(const std::wstring& path)
 {
-	OS(Dir)::Remove(path);
+	return OS(Dir)::Remove(path);
 }
 
 std::wstring Dir::Name() const
@@ -58,7 +58,7 @@ bool Dir::Create()
 	return OS(Dir)::Create(m_path);
 }
 
-void Dir::Remove()
+bool Dir::Remove()
 {
-	Dir::Remove(m_path);
+	return Dir::Remove(m_path);
 }
