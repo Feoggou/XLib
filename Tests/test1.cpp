@@ -1,36 +1,25 @@
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 
-#include "XLib/XLib.h"
 #include "XLib/Dir.h"
 
 using namespace Zen;
 
-class FxtEmptyDir : public ::testing::Test
+TEST(EmptyDir, CreateDir)
 {
-public:
-	FxtEmptyDir() : m_path(L"temp_path") {}
-
-	void TearDown() override
-	{
-		Zen::Dir::Remove(L"temp");
-		ASSERT_FALSE(Zen::Dir::Exists(L"temp"));
-	}
-
-protected:
-	std::wstring m_path;
-};
-
-TEST_F(FxtEmptyDir, CreateDir)
-{
-	Zen::Dir dir;
+	Dir dir;
 	std::wstring name(L"temp");
 
-	ASSERT_NO_THROW(dir = Zen::Dir::Create(name));
+	ASSERT_FALSE(Dir::Exists(name));
+	ASSERT_NO_THROW(dir = Dir::Create(name));
 	ASSERT_STREQ(name.data(), dir.Name().data());
-
 	ASSERT_TRUE(dir.Exists());
+	ASSERT_TRUE(Dir::Exists(name));
+	ASSERT_NO_THROW(dir.Remove());
+	ASSERT_FALSE(dir.Exists());
 }
+
+//TODO: FixEmptyDir, CreateDir of invalid path
 
 int main(int argc, char* argv[])
 {
