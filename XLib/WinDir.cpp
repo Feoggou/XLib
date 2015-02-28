@@ -30,13 +30,21 @@ bool WinDir::Exists(const std::wstring& path)
 	return true;
 }
 
-void WinDir::Create(const std::wstring& path)
+bool WinDir::Create(const std::wstring& path)
 {
 	BOOL ok = CreateDirectoryW(path.data(), NULL);
 	if (!ok)
 	{
+		DWORD error = GetLastError();
+		if (error == ERROR_ALREADY_EXISTS)
+		{
+			return false;
+		}
+		
 		throw FSException(GetLastError());
 	}
+
+	return true;
 }
 
 void WinDir::Remove(const std::wstring& path)

@@ -14,7 +14,7 @@ namespace Zen
 		Dir& operator=(Dir&& other);
 
 		bool Exists() const;
-		void Create();
+		bool Create();
 		void Remove();
 		std::wstring Name() const;
 

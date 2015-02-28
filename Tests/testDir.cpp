@@ -19,6 +19,18 @@ TEST(EmptyDir, CreateDir)
 	ASSERT_FALSE(dir.Exists());
 }
 
+TEST(EmptyDir, CreateDirTwice)
+{
+	Dir dir(L"temp2");
+
+	ASSERT_FALSE(dir.Exists());
+	ASSERT_TRUE(dir.Create());
+	ASSERT_TRUE(dir.Exists());
+	ASSERT_FALSE(dir.Create());
+	ASSERT_NO_THROW(dir.Remove());
+	ASSERT_FALSE(dir.Exists());
+}
+
 //TODO: FixEmptyDir, CreateDir of invalid path
 
 int main(int argc, char* argv[])

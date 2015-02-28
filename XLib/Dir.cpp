@@ -53,9 +53,9 @@ bool Dir::Exists(const std::wstring& path)
 	return OS(Dir)::Exists(path);
 }
 
-void Dir::Create()
+bool Dir::Create()
 {
-	OS(Dir)::Create(m_path);
+	return OS(Dir)::Create(m_path);
 }
 
 void Dir::Remove()
