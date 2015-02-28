@@ -1,4 +1,6 @@
-- create directory of path (not only name)
+- in lib assert-s
+- create directory of full path (not only name)
+- create directory paths
 - invalid paths + \\?\
 - paths: change / to \\ or vice versa
 
