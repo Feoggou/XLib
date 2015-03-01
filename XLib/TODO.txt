@@ -1,3 +1,5 @@
+- make DLLs
+- build on linux
 - in lib assert-s
 - create directory of full path (not only name)
 - create directory paths
