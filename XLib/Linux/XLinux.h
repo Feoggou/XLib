@@ -16,8 +16,8 @@
 
 #pragma once
 
-#if !WIN32
-#error This file must be included only on Windows!
+#if !__linux__
+#error This file must be included only on Linux!
 #endif
 
-#include <Windows.h>
+//#include <sys/types.h>

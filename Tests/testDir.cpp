@@ -17,6 +17,7 @@
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 
+#include "XLib/XLib.h"
 #include "XLib/Dir.h"
 
 using namespace Zen;
@@ -24,7 +25,7 @@ using namespace Zen;
 TEST(EmptyDir, CreateDir)
 {
 	Dir dir;
-	std::wstring name(L"temp");
+    std::tstring name(T("temp"));
 
 	ASSERT_FALSE(Dir::Exists(name));
 	ASSERT_NO_THROW(dir = Dir::Create(name));
@@ -35,9 +36,24 @@ TEST(EmptyDir, CreateDir)
 	ASSERT_FALSE(dir.Exists());
 }
 
+TEST(EmptyDir, CreateDirUnicodeName)
+{
+    Dir dir;
+    std::tstring name(T("temp-şperţ-p"));
+    //size_t sz = name.length();
+
+    ASSERT_FALSE(Dir::Exists(name));
+    ASSERT_NO_THROW(dir = Dir::Create(name));
+    ASSERT_STREQ(name.data(), dir.FullPath().data());
+    ASSERT_TRUE(dir.Exists());
+    ASSERT_TRUE(Dir::Exists(name));
+    ASSERT_TRUE(dir.Remove());
+    ASSERT_FALSE(dir.Exists());
+}
+
 TEST(EmptyDir, CreateDirTwice)
 {
-	Dir dir(L"temp2");
+    Dir dir(T("temp2"));
 
 	ASSERT_FALSE(dir.Exists());
 	ASSERT_TRUE(dir.Create());
@@ -49,7 +65,7 @@ TEST(EmptyDir, CreateDirTwice)
 
 TEST(EmptyDir, RemoveDirTwice)
 {
-	Dir dir(L"temp3");
+    Dir dir(T("temp3"));
 
 	ASSERT_FALSE(dir.Exists());
 	ASSERT_TRUE(dir.Create());

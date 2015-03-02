@@ -16,31 +16,8 @@
 
 #pragma once
 
-#include <string>
-
-#ifdef WIN32
-#define OS(X) Win##X
-namespace std
-{
-    typedef wstring tstring;
-}
-
-typedef wchar_t tchar;
-#define T(x)    L##x
-
-#elif defined(__linux__)
-#define OS(X) Linux##X
-namespace std
-{
-    typedef string  tstring;
-}
-
-typedef char    tchar;
-#define T(x)    x
-
-#else
-#error NOT IMPLEMENTED!
+#if !WIN32
+#error This file must be included only on Windows!
 #endif
 
-
-void doX();
+#include <Windows.h>

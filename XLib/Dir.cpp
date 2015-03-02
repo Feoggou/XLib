@@ -19,6 +19,8 @@
 
 #ifdef WIN32
 #include "WinDir.h"
+#elif defined(__linux__)
+#include "LinuxDir.h"
 #else
 #error NOT IMPLEMENTED!
 #endif
@@ -40,7 +42,7 @@ Dir& Dir::operator=(Dir&& other)
 	return *this;
 }
 
-Dir Dir::Create(const std::wstring& path)
+Dir Dir::Create(const std::tstring& path)
 {
 	Dir dir(path);
 	dir.Create();
@@ -48,12 +50,12 @@ Dir Dir::Create(const std::wstring& path)
 	return dir;
 }
 
-bool Dir::Remove(const std::wstring& path)
+bool Dir::Remove(const std::tstring& path)
 {
 	return OS(Dir)::Remove(path);
 }
 
-std::wstring Dir::FullPath() const
+std::tstring Dir::FullPath() const
 {
 	//TODO: name, not path
 	return m_path;
@@ -64,7 +66,7 @@ bool Dir::Exists() const
 	return Dir::Exists(m_path);
 }
 
-bool Dir::Exists(const std::wstring& path)
+bool Dir::Exists(const std::tstring &path)
 {
 	return OS(Dir)::Exists(path);
 }
@@ -81,6 +83,6 @@ bool Dir::Remove()
 
 Dir Dir::GetCurrent()
 {
-	std::wstring path = OS(Dir)::GetCurrent();
+    std::tstring path = OS(Dir)::GetCurrent();
 	return Dir(path);
 }

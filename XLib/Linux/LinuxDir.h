@@ -19,29 +19,23 @@
 #include <string>
 #include "XLib.h"
 
+#if !__linux__
+#error This file must be included only on Linux!
+#endif
+
 namespace Zen
 {
-	class Dir
+	class LinuxDir
 	{
 	public:
-		Dir() = default;
-		Dir(Dir&& other);
-        explicit Dir(const std::tstring& path) : m_path(path) {}
-
-		Dir& operator=(Dir&& other);
-
-		bool Exists() const;
-		bool Create();
-		bool Remove();
-        std::tstring FullPath() const;
-
-	public:
-        static Dir Create(const std::tstring& path);
+		// Creates a Directory of the given path. If a directory with the same name already exists, the function returns false.
+		// If there is an error, an exception is thrown. If the directory is created, it returns true.
+        static bool Create(const std::tstring& path);
+		// Removes a Directory of the given path. If no directory with the name, the function returns false.
+		// If there is an error, an exception is thrown. If the directory is removed, it returns true.
         static bool Remove(const std::tstring& path);
         static bool Exists(const std::tstring& path);
-		static Dir GetCurrent();
 
-	private:
-        std::tstring m_path;
+        static std::tstring GetCurrent();
 	};
 }
