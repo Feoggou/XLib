@@ -16,6 +16,16 @@
 
 #pragma once
 
+#if PROJ_LINK_SHARED
+#ifdef XLIB_EXPORTS
+#define XLIB_API __declspec(dllexport)
+#else
+#define XLIB_API __declspec(dllimport)
+#endif
+#else
+#define XLIB_API
+#endif //PROJ_LINK_SHARED
+
 #include <string>
 
 #ifdef WIN32
