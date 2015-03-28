@@ -19,6 +19,18 @@ if (NOT PROJ_LIB_TYPES)
     set(PROJ_LIB_TYPES "STATIC")
 endif()
 
+message(STATUS "homeDir=${CMAKE_HOME_DIRECTORY}")
+message(STATUS "listDir=${CMAKE_CURRENT_LIST_DIR}")
+
+if ("${CMAKE_HOME_DIRECTORY}" STREQUAL "${CMAKE_CURRENT_LIST_DIR}")
+	SET(isTop 1)
+	message(STATUS "this is TOP: ${isTop}")
+	set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}")
+	message(STATUS "module path= ${CMAKE_MODULE_PATH}")
+	include(Macros)
+	# include(Init)
+endif()
+
 enable_testing()
 
 project(XLib)
@@ -30,6 +42,28 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY    ${CMAKE_BINARY_DIR}/bin)
 set(CFLAG CMAKE_CXX_FLAGS_DEBUG)
 string(REPLACE "/MD" "/MT" ${CFLAG} "${${CFLAG}}")
 message(STATUS "link flags: ${CMAKE_CXX_FLAGS_DEBUG}")
+
+if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" OR "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=c++11")
+endif()
+
+if (${isTop} EQUAL 1)
+	message(STATUS "building as TOP, i.e. building XLib separately")
+	set(GMOCK_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/gmock-1.7.0/include")
+	set(GMOCK_LIB_DIR "${CMAKE_BINARY_DIR}/bin")
+
+	set(GTEST_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/gmock-1.7.0/gtest/include")
+	set(GTEST_LIB_DIR "${CMAKE_BINARY_DIR}/bin")
+
+	message(STATUS "GMOCK_INCLUDE_DIR=${GMOCK_INCLUDE_DIR}")
+	message(STATUS "GTEST_INCLUDE_DIR=${GTEST_INCLUDE_DIR}")
+	message(STATUS "GMOCK_LIB_DIR=${GMOCK_LIB_DIR}")
+	message(STATUS "GTEST_LIB_DIR=${GTEST_LIB_DIR}")
+
+	if ("${PROJ_LIB_TYPES}" STREQUAL "STATIC")
+		add_subdirectory(gmock-1.7.0)
+	endif()
+endif()
 
 add_subdirectory(XLib)
 add_subdirectory(Tests)
