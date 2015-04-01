@@ -22,6 +22,7 @@ endif()
 message(STATUS "homeDir=${CMAKE_HOME_DIRECTORY}")
 message(STATUS "listDir=${CMAKE_CURRENT_LIST_DIR}")
 
+SET(isTop 0)
 if ("${CMAKE_HOME_DIRECTORY}" STREQUAL "${CMAKE_CURRENT_LIST_DIR}")
 	SET(isTop 1)
 	message(STATUS "this is TOP: ${isTop}")
