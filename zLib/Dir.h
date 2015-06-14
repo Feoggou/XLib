@@ -25,11 +25,11 @@
 */
 
 #include <string>
-#include "XLib.h"
+#include "zLib.h"
 
 namespace Zen
 {
-	class XLIB_API Dir
+	class ZLIB_API Dir
 	{
 	public:
 		Dir() = default;

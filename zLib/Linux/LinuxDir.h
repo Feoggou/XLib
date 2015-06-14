@@ -17,7 +17,7 @@
 #pragma once
 
 #include <string>
-#include "XLib.h"
+#include "zLib.h"
 
 #if !__linux__
 #error This file must be included only on Linux!

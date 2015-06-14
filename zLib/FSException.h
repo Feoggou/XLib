@@ -17,9 +17,9 @@
 #pragma once
 
 #include <cstdint>
-#include "XLib.h"
+#include "zLib.h"
 
-class XLIB_API FSException
+class ZLIB_API FSException
 {
 public:
 	FSException(uint32_t code) {}

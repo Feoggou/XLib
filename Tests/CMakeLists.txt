@@ -14,7 +14,7 @@
 
 InitExe()
 
-list(APPEND G_INCLUDE_DIRS "${CMAKE_SOURCE_DIR}/XLib")
-list(APPEND G_LINK_TARGETS XLib)
+list(APPEND G_INCLUDE_DIRS "${CMAKE_SOURCE_DIR}/zLib")
+list(APPEND G_LINK_TARGETS zLib)
 
-CreateTests(XLib_)
+CreateTests(zLib_)

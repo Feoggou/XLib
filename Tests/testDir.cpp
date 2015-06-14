@@ -17,8 +17,8 @@
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 
-#include "XLib/XLib.h"
-#include "XLib/Dir.h"
+#include "zLib/zLib.h"
+#include "zLib/Dir.h"
 
 using namespace Zen;
 

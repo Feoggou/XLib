@@ -1,6 +1,5 @@
 - travis: disable. perhaps try setting jenkins on a linux vm.
 - git submodules - is everything ok?
-- rename XLib -> zLib
 - rc files on windows - version
 - ssh files on linux machine
 - cpack / make install

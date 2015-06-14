@@ -15,7 +15,7 @@
 */
 
 #include "Dir.h"
-#include "XLib.h"
+#include "zLib.h"
 
 #ifdef WIN32
 #include "WinDir.h"

@@ -14,43 +14,8 @@
 *  limitations under the License.
 */
 
-#pragma once
+#include "zLib.h"
 
-#if PROJ_LINK_SHARED
-#ifdef XLIB_EXPORTS
-#define XLIB_API __declspec(dllexport)
-#else
-#define XLIB_API __declspec(dllimport)
-#endif
-#else
-#define XLIB_API
-#endif //PROJ_LINK_SHARED
-
-#include <string>
-
-#ifdef WIN32
-#define OS(X) Win##X
-namespace std
+void doX()
 {
-    typedef wstring tstring;
 }
-
-typedef wchar_t tchar;
-#define T(x)    L##x
-
-#elif defined(__linux__)
-#define OS(X) Linux##X
-namespace std
-{
-    typedef string  tstring;
-}
-
-typedef char    tchar;
-#define T(x)    x
-
-#else
-#error NOT IMPLEMENTED!
-#endif
-
-
-void doX();

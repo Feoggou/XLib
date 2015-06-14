@@ -14,7 +14,7 @@
 
 cmake_minimum_required (VERSION 3.1)
 
-option(PROJ_LIB_TYPES "Use zSearch and XLib as static libs." "STATIC")
+option(PROJ_LIB_TYPES "Use zSearch and zLib as static libs." "STATIC")
 if (NOT PROJ_LIB_TYPES)
     set(PROJ_LIB_TYPES "STATIC")
 endif()
@@ -34,7 +34,7 @@ endif()
 
 enable_testing()
 
-project(XLib)
+project(zLib)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY    ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY    ${CMAKE_BINARY_DIR}/bin)
@@ -49,7 +49,7 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" OR "${CMAKE_CXX_COMPILER_ID}" STR
 endif()
 
 if (${isTop} EQUAL 1)
-	message(STATUS "building as TOP, i.e. building XLib separately")
+	message(STATUS "building as TOP, i.e. building zLib separately")
 	set(GMOCK_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/gmock-1.7.0/include")
 	set(GMOCK_LIB_DIR "${CMAKE_BINARY_DIR}/bin")
 
@@ -66,5 +66,5 @@ if (${isTop} EQUAL 1)
 	endif()
 endif()
 
-add_subdirectory(XLib)
+add_subdirectory(zLib)
 add_subdirectory(Tests)
