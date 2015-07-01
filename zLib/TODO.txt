@@ -1,3 +1,4 @@
+- download gmock & gtest at cmake step. or find a better alternative (problem building zLib separately)
 - travis: disable. perhaps try setting jenkins on a linux vm.
 - git submodules - is everything ok?
 - rc files on windows - version
