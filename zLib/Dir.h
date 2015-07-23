@@ -41,6 +41,7 @@ namespace Zen
 		bool Exists() const;
 		bool Create();
 		bool Remove();
+		std::tstring Name() const { return m_path; }
         std::tstring FullPath() const;
 
 	public:
