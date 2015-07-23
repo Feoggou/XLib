@@ -63,6 +63,10 @@ std::tstring Dir::FullPath() const
 
 bool Dir::Exists() const
 {
+	if (m_path.empty()) {
+		return false;
+	}
+
 	return Dir::Exists(m_path);
 }
 
