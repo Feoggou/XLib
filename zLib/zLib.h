@@ -35,6 +35,8 @@ namespace std
     typedef wstring tstring;
 }
 
+#define ZEN_TO_TSTRING(number) std::to_wstring(number);
+
 typedef wchar_t tchar;
 #define T(x)    L##x
 
@@ -44,6 +46,8 @@ namespace std
 {
     typedef string  tstring;
 }
+
+#define ZEN_TO_TSTRING(number) std::to_string(number);
 
 typedef char    tchar;
 #define T(x)    x
