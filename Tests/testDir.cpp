@@ -101,13 +101,8 @@ TEST(EmptyDir, CreatedDir_SpecialChars_Exists)
 	ASSERT_TRUE(dir.Exists());
 }
 
-TEST(EmptyDir, AbsolutePath)
+TEST(DISABLED_EmptyDir, CreateDir_InvalidPath)
 {
-	std::tstring name = createUniqueName();
-	Dir dir(name);
-	dir.Create();
-
-	ASSERT_EQ(name, dir.FullPath());
 	FAIL();
 }
 
@@ -128,13 +123,39 @@ TEST(EmptyDir, RemoveDirTwice_ReturnsFalse)
 	ASSERT_FALSE(dir.Remove());
 }
 
-TEST(EmptyDir, GetCurrentDir)
+TEST(CurrentDir, Exists)
 {
 	Dir dir = Dir::GetCurrent();
-	ASSERT_GT(dir.FullPath().size(), 1UL);
+	ASSERT_TRUE(dir.Exists());
 }
 
-//TODO: FixEmptyDir, CreateDir of invalid path
+TEST(DirPath, DisplayName_WhenPathIsName)
+{
+	std::tstring name = createUniqueName();
+	Dir dir(name);
+
+	ASSERT_EQ(dir.Name(), name);
+}
+
+TEST(DISABLED_DirPath, DisplayName_WhenPathIsRelative)
+{
+	std::tstring path = T("a/b/c/");
+	std::tstring name = createUniqueName();
+	path += name;
+
+	Dir dir(path);
+
+	ASSERT_EQ(dir.Name(), name);
+}
+
+TEST(DISABLED_DirPath, Absolute)
+{
+	std::tstring name = createUniqueName();
+	Dir dir(name);
+	std::tstring fullPath = dir.FullPath();
+
+	ASSERT_GT(fullPath.length(), name.length());
+}
 
 int main(int argc, char* argv[])
 {
