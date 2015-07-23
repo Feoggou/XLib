@@ -20,60 +20,112 @@
 #include "zLib/zLib.h"
 #include "zLib/Dir.h"
 
+#include <string>
+
+#include <chrono>
+
 using namespace Zen;
+
+std::tstring createUniqueName(const std::tstring& base = T("uniqueName_"))
+{
+	std::tstring uniqueName = base;
+
+	auto now = std::chrono::steady_clock::now();
+	auto rep = now.time_since_epoch().count();
+	std::wstring ws;
+
+	uniqueName += ZEN_TO_TSTRING(rep);
+
+	return uniqueName;
+}
+
+TEST(DefaultDir, DoesNotExist)
+{
+	Dir dir;
+
+	ASSERT_FALSE(dir.Exists());
+}
+
+TEST(DefaultDirWithPath, DoesNotExist)
+{
+	Dir dir(createUniqueName());
+
+	ASSERT_FALSE(dir.Exists());
+}
 
 TEST(EmptyDir, CreateDir)
 {
-	Dir dir;
-    std::tstring name(T("temp"));
+	Dir dir(createUniqueName());
 
-	ASSERT_FALSE(Dir::Exists(name));
-	ASSERT_NO_THROW(dir = Dir::Create(name));
-	ASSERT_STREQ(name.data(), dir.FullPath().data());
+	ASSERT_TRUE(dir.Create());
+}
+
+TEST(EmptyDir, CreatedDirExists)
+{
+	Dir dir(createUniqueName());
+
+	dir.Create();
 	ASSERT_TRUE(dir.Exists());
-	ASSERT_TRUE(Dir::Exists(name));
+}
+
+TEST(EmptyDir, RemoveDir)
+{
+	Dir dir(createUniqueName());
+	dir.Create();
+
 	ASSERT_TRUE(dir.Remove());
+}
+
+TEST(EmptyDir, RemovedDirDoesNotExist)
+{
+	Dir dir(createUniqueName());
+	dir.Create();
+	dir.Remove();
+
 	ASSERT_FALSE(dir.Exists());
 }
 
 TEST(EmptyDir, CreateDirUnicodeName)
 {
-    Dir dir;
-    std::tstring name(T("temp-şperţ-p"));
-    //size_t sz = name.length();
-
-    ASSERT_FALSE(Dir::Exists(name));
-    ASSERT_NO_THROW(dir = Dir::Create(name));
-    ASSERT_STREQ(name.data(), dir.FullPath().data());
-    ASSERT_TRUE(dir.Exists());
-    ASSERT_TRUE(Dir::Exists(name));
-    ASSERT_TRUE(dir.Remove());
-    ASSERT_FALSE(dir.Exists());
+    std::tstring name = createUniqueName(T("temp-şperţ-p"));
+    
+	ASSERT_NO_THROW(Dir::Create(name));
 }
 
-TEST(EmptyDir, CreateDirTwice)
+// NOTE: if we can create a directory with a unique name, we can clearly perform other file system operations with paths containing special characters.
+TEST(EmptyDir, CreatedDir_SpecialChars_Exists)
 {
-    Dir dir(T("temp2"));
+	std::tstring name = createUniqueName(T("temp-şperţ-p"));
 
-	ASSERT_FALSE(dir.Exists());
-	ASSERT_TRUE(dir.Create());
+	Dir dir = Dir::Create(name);
 	ASSERT_TRUE(dir.Exists());
+}
+
+TEST(EmptyDir, AbsolutePath)
+{
+	std::tstring name = createUniqueName();
+	Dir dir(name);
+	dir.Create();
+
+	ASSERT_EQ(name, dir.FullPath());
+	FAIL();
+}
+
+TEST(EmptyDir, CreateDirTwice_ReturnsFalse)
+{
+	Dir dir(createUniqueName());
+
+	dir.Create();
 	ASSERT_FALSE(dir.Create());
-	ASSERT_TRUE(dir.Remove());
-	ASSERT_FALSE(dir.Exists());
 }
 
-TEST(EmptyDir, RemoveDirTwice)
+TEST(EmptyDir, RemoveDirTwice_ReturnsFalse)
 {
-    Dir dir(T("temp3"));
+	Dir dir(createUniqueName());
 
-	ASSERT_FALSE(dir.Exists());
-	ASSERT_TRUE(dir.Create());
-	ASSERT_TRUE(dir.Exists());
-	ASSERT_TRUE(dir.Remove());
-	ASSERT_FALSE(dir.Exists());
+	dir.Create();
+	dir.Remove();
 	ASSERT_FALSE(dir.Remove());
-	ASSERT_FALSE(dir.Exists());
 }
 
 TEST(EmptyDir, GetCurrentDir)
