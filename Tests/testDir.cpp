@@ -157,6 +157,20 @@ TEST(DISABLED_DirPath, Absolute)
 	ASSERT_GT(fullPath.length(), name.length());
 }
 
+TEST(DirPath, CurrentDirPath_isAbsolute)
+{
+	Dir current = Dir::GetCurrent();
+
+	std::tstring fullName = current.FullPath();
+	
+#if WIN32
+	ASSERT_EQ(fullName.at(1), ':');
+	ASSERT_EQ(fullName.at(2), '\\');
+#else
+	ASSERT_EQ(fullName.at(0), '/');
+#endif
+}
+
 int main(int argc, char* argv[])
 {
 	::testing::InitGoogleMock(&argc, argv);
