@@ -18,11 +18,21 @@
 
 #if PROJ_LINK_SHARED
 #ifdef ZLIB_EXPORTS
+#ifdef WIN32
 #define ZLIB_API __declspec(dllexport)
+#elif defined (__linux__)
+#define ZLIB_API __attribute__ ((visibility ("default")))
+#endif //WIN32
 #else
+/* if ZLIB_EXPORTS not defined: */
+#ifdef WIN32
 #define ZLIB_API __declspec(dllimport)
-#endif
+#elif defined(__linux__)
+#define ZLIB_API __attribute__ ((visibility ("default")))
+#endif //WIN32
+#endif //ZLIB_EXPORTS
 #else
+/*if PROJ_LINK_SHARED is not defined (i.e. building as static lib)*/
 #define ZLIB_API
 #endif //PROJ_LINK_SHARED
 
