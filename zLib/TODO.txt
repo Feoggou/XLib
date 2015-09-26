@@ -1,23 +1,25 @@
+CONFIGURATIONS
 - download gmock & gtest at cmake step. or find a better alternative (problem building zLib separately)
-- travis: disable. perhaps try setting jenkins on a linux vm.
 - git submodules - is everything ok?
 - rc files on windows - version
 - ssh files on linux machine
 - cpack / make install
+- CMake files do not currently know about Windows or Linux files.
+- We "export" classes that use "std::string" and other dynamically-linked components.
+- should "zLib" contain zSearch and other zLib projects, or vice-versa?
 
-- make DLLs
-- build on linux
-- in lib assert-s
+CODE
 - create directory of full path (not only name)
 - create directory paths
-- invalid paths + \\?\
+- invalid paths + \\?\ -- shoule we consider?
 - paths: change / to \\ or vice versa
-
-- CMake files do not currently know about Windows or Linux files.
 - #define THROW_IF_FALSE / WIN_THROW
 - dir: name not path
+- merge test utilities from "lib" and "zSearch"
 
 LATER ON:
 - classes Exception (abstract?)
 - Logging in Exception
 - Logs require File and more advanced Dir functionality
+- A better String class, that better manages UTF-8 paths and brings additional functionality?
+- A "path" class, to better manage OS paths and encoding (UTF-16LE vs UTF-8)
