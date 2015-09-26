@@ -148,7 +148,7 @@ TEST(DISABLED_DirPath, DisplayName_WhenPathIsRelative)
 	ASSERT_EQ(dir.Name(), name);
 }
 
-TEST(DISABLED_DirPath, Absolute)
+TEST(DirPath, Absolute)
 {
 	std::tstring name = createUniqueName();
 	Dir dir(name);
