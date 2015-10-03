@@ -19,6 +19,7 @@
 
 #include "zLib/zLib.h"
 #include "zLib/Dir.h"
+#include "zLib/Path.h"
 
 #include <string>
 
@@ -162,13 +163,8 @@ TEST(DirPath, CurrentDirPath_isAbsolute)
 	Dir current = Dir::GetCurrent();
 
 	std::tstring fullName = current.FullPath();
-	
-#if WIN32
-	ASSERT_EQ(fullName.at(1), ':');
-	ASSERT_EQ(fullName.at(2), '\\');
-#else
-	ASSERT_EQ(fullName.at(0), '/');
-#endif
+
+    ASSERT_TRUE(Path::isAbsolute(fullName));
 }
 
 int main(int argc, char* argv[])
