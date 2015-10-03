@@ -8,6 +8,10 @@ CONFIGURATIONS
 - We "export" classes that use "std::string" and other dynamically-linked components.
 - should "zLib" contain zSearch and other zLib projects, or vice-versa?
 
+USER
+- provide command line functionality to search
+- provide GUI functionality
+
 CODE
 - create directory of full path (not only name)
 - create directory paths
@@ -23,3 +27,55 @@ LATER ON:
 - Logs require File and more advanced Dir functionality
 - A better String class, that better manages UTF-8 paths and brings additional functionality?
 - A "path" class, to better manage OS paths and encoding (UTF-16LE vs UTF-8)
+
+
+USER STORIES
+------------
+1. Having the current directory D, if the user searches for item (regardless of file / dir / whatever),
+   and there is only one item, with exact that name in the current directory, it must be found - all details
+   the os provides about that item must be displayed (except for parent).
+
+   Functionality thus provided: most basic form of search.
+
+    TASKS
+    -----
+        a. Write a functional test that tests exactly this case, and has a predefined knowledge of what the app
+           is supposed to return. the test will fail.
+        b. Write a functional / integration test in c++, testing the search - without all the needed infrastructure.
+           the test will make sure that the 'search' operation works, no matter how the outer infrastructure will be like.
+        c. Write unit tests for each infrastructure unit that must be implemented, and integrate all.
+
+2. more than one item
+
+3. item not found
+
+4. dir has folders and files
+
+5. dir is not current dir
+
+6. user does not have read access at dir.
+
+7. specific search options (see A)
+
+A. the user would desire the following search options (find by):
+name, exact
+name, relative
+case sensitive
+case insensitive
+wildcards
+regular expression
+(mime) type: image / plain text / etc.
+size: min, max
+datetime created, modified, read (as much as the os offers support)
+type: folder, file
+
+find by content:
+as ASCII, utf-8, utf-16le, utf16-be, utf32-le, utf32-be; default = search for any possibility
+find "word"
+case sensitivie, insensitive
+regular expression
+
+B. the user would desire the following format for result:
+plain text, to be used by custom tool (e.g. text parsing tool).
+pretty printed text
+yield only specific fields as result.
