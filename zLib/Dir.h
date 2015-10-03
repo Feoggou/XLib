@@ -26,6 +26,10 @@ namespace Zen
 	public:
 		Dir() = default;
 		Dir(Dir&& other);
+        /* path: the name (or path) of the Directory.
+         * If it is a name, or a relative path, it will represent a Directory in the current directory.
+         * Otherwise, it will represent the directory described in path.
+         */
         explicit Dir(const std::tstring& path) : m_path(path) {}
 
 		Dir& operator=(Dir&& other);
