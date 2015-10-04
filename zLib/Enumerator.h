@@ -26,6 +26,9 @@ namespace Zen
     public:
         struct Item
         {
+            Item() = default;
+            Item(const std::tstring& name) : name(name) {}
+
             std::tstring name;
         };
 
