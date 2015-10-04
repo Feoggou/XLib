@@ -26,10 +26,14 @@ namespace Zen
     public:
         struct Item
         {
+        	/* TODO: we have such a 'Type' enum in SearchResultItem as well */
+            enum Type { Unknown = 0, File, Directory };
+
             Item() = default;
-            Item(const std::tstring& name) : name(name) {}
+            Item(const std::tstring& name, Type type = Unknown) : name(name), type(type) {}
 
             std::tstring name;
+            Type type;
         };
 
 	public:
