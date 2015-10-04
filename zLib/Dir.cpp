@@ -58,7 +58,7 @@ bool Dir::Remove(const std::tstring& path)
 std::tstring Dir::FullPath() const
 {
 	//TODO: name, not path
-	return m_path;
+    return m_path;
 }
 
 bool Dir::Exists() const
@@ -89,4 +89,9 @@ Dir Dir::GetCurrent()
 {
     std::tstring path = OS(Dir)::GetCurrent();
 	return Dir(path);
+}
+
+Enumerator Dir::CreateEnumerator() const
+{
+    return Enumerator();
 }
