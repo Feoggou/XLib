@@ -44,7 +44,7 @@ namespace Zen
         DirEnumerator() : m_haveNext(true) {}
         DirEnumerator(DirEnumerator&& other);
 
-        bool HaveNext() const override { return m_haveNext; }
+        bool HaveNext() const override { return false; }
         void Advance() override { m_haveNext = false; }
 
         Item GetItem() const override { Item item; item.name = "OneItem"; return item; }
