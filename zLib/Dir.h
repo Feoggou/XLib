@@ -41,7 +41,7 @@ namespace Zen
 		bool Remove();
 		std::tstring Name() const { return m_path; }
         std::tstring FullPath() const;
-        Enumerator CreateEnumerator() const;
+        Enumerator* CreateEnumerator() const;
 
 	public:
         static Dir Create(const std::tstring& path);

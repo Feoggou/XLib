@@ -29,7 +29,7 @@
 
 using namespace Zen;
 
-Enumerator::Enumerator(Enumerator&&)
+DirEnumerator::DirEnumerator(DirEnumerator&&)
     /*: m_path(std::move(other.m_path))*/
 {
 }

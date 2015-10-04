@@ -91,7 +91,7 @@ Dir Dir::GetCurrent()
 	return Dir(path);
 }
 
-Enumerator Dir::CreateEnumerator() const
+Enumerator* Dir::CreateEnumerator() const
 {
-    return Enumerator();
+    return new DirEnumerator();
 }

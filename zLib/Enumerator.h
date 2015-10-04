@@ -30,15 +30,26 @@ namespace Zen
         };
 
 	public:
-        Enumerator() : m_haveNext(true) {}
-        Enumerator(Enumerator&& other);
+        Enumerator() = default;
+        Enumerator(Enumerator&& other) = default;
 
-        bool HaveNext() const { return m_haveNext; }
-        void Advance() { m_haveNext = false; }
+        virtual bool HaveNext() const = 0;
+        virtual void Advance()  = 0;
+        virtual Item GetItem() const = 0;
+	};
 
-        Item GetItem() const { Item item; item.name = "OneItem"; return item; }
+    class DirEnumerator : public Enumerator
+    {
+    public:
+        DirEnumerator() : m_haveNext(true) {}
+        DirEnumerator(DirEnumerator&& other);
+
+        bool HaveNext() const override { return m_haveNext; }
+        void Advance() override { m_haveNext = false; }
+
+        Item GetItem() const override { Item item; item.name = "OneItem"; return item; }
 
     private:
         bool m_haveNext;
-	};
+    };
 }
