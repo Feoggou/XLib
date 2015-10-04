@@ -21,7 +21,7 @@
 
 namespace Zen
 {
-    class ZLIB_API Enumerator
+    class Enumerator
 	{
     public:
         struct Item
@@ -29,39 +29,16 @@ namespace Zen
             std::tstring name;
         };
 
-        class iterator
-        {
-        public:
-            iterator(bool isEnd = false) : m_isEnd(isEnd) {}
-
-            bool operator!=(const iterator& other)
-            {
-                return m_isEnd != other.m_isEnd;
-            }
-
-            iterator& operator++()
-            {
-                m_isEnd = true;
-                return *this;
-            }
-
-            Item operator*()
-            {
-                Item item;
-                item.name = "OneItem";
-
-                return item;
-            }
-
-        private:
-            bool m_isEnd;
-        };
-
 	public:
-        Enumerator() = default;
+        Enumerator() : m_haveNext(true) {}
         Enumerator(Enumerator&& other);
 
-        iterator begin() { return iterator(); }
-        iterator end() { return iterator(/*is end*/ true); }
+        bool HaveNext() const { return m_haveNext; }
+        void Advance() { m_haveNext = false; }
+
+        Item GetItem() const { Item item; item.name = "OneItem"; return item; }
+
+    private:
+        bool m_haveNext;
 	};
 }
