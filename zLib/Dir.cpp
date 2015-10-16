@@ -90,8 +90,3 @@ Dir Dir::GetCurrent()
     std::tstring path = OS(Dir)::GetCurrent();
 	return Dir(path);
 }
-
-Enumerator* Dir::CreateEnumerator() const
-{
-    return new DirEnumerator();
-}
