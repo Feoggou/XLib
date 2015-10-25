@@ -7,6 +7,12 @@ CONFIGURATIONS
 - CMake files do not currently know about Windows or Linux files.
 - We "export" classes that use "std::string" and other dynamically-linked components.
 - should "zLib" contain zSearch and other zLib projects, or vice-versa?
+- boost - I may need it
+- update gmock & gtest -- from github
+- use 'prebuilt' libraries.
+- zLib must include project directories. must replan directory structure.
+- fix problems with debugging / IDE.
+- clang / llvm or gcc?
 
 USER
 - provide command line functionality to search
