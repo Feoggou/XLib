@@ -14,7 +14,7 @@
 *  limitations under the License.
 */
 
-#include "XWin.h"
+
 
 #include "Finder.h"
 
@@ -58,6 +58,7 @@ Results Finder::operator()()
 
 #else
 
+#include "XWin.h"
 #include "WinFinder.h"
 
 Results Finder::operator()()
