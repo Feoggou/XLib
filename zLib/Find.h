@@ -31,7 +31,15 @@ namespace Zen
 
     typedef std::vector<ResultItem> Results;
 
-    class ZLIB_API Find
+    class ZLIB_API IFind
+    {
+    public:
+        virtual ~IFind() {}
+
+        virtual Results operator()() = 0;
+    };
+
+    class ZLIB_API Find : public IFind
     {
     public:
         Find() : m_dirPath(T(".")) {}
