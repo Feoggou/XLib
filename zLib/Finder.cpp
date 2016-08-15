@@ -54,10 +54,10 @@ Results Finder::operator()()
 
 #else
 
-Results Find::operator()()
+Results Finder::operator()()
 {
     if (m_dirPath.empty())
-        return ZSearch::Results{};
+        return Results{};
 
     ResultItem item = { T("OneItem") };
     return Results{ item };
