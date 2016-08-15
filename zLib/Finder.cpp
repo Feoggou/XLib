@@ -14,7 +14,7 @@
 *  limitations under the License.
 */
 
-#include "Find.h"
+#include "Finder.h"
 
 #include <iostream>
 #include <memory>
@@ -26,7 +26,7 @@ using namespace Zen;
 #ifdef __linux__
 #include <dirent.h>
 
-Results Find::operator()()
+Results Finder::operator()()
 {
     Results r;
 
