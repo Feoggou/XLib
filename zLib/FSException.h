@@ -19,8 +19,14 @@
 #include <cstdint>
 #include "zLib.h"
 
+//TODO: consider inheriting from std::system_error
 class ZLIB_API FSException
 {
 public:
-	FSException(uint32_t code) {}
+    FSException(uint32_t code) : code(code) { }
+
+    uint32_t Code() const { return code; }
+
+private:
+    uint32_t code;
 };
