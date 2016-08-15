@@ -2,7 +2,7 @@
 #include "XWin.h"
 #include "WinFinder.h"
 
-Zen::Results Zen::WinFind::Find()
+Zen::Results Zen::WinFinder::Find()
 {
     WIN32_FIND_DATAW findData;
     BOOL more = true;

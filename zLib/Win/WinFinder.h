@@ -25,7 +25,7 @@
 
 namespace Zen
 {
-    class WinFind
+    class WinFinder
     {
     public:
         static Results Find();

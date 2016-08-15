@@ -14,26 +14,16 @@
 *  limitations under the License.
 */
 
-
-
-#include "Finder.h"
-
 #ifdef __linux__
 #include "LinuxFinder.h"
-
-Zen::Results Zen::Finder::operator()()
-{
-    return LinuxFinder{}.Find();
-}
-
 #else
-
 #include "XWin.h"
 #include "WinFinder.h"
 
+#include "Finder.h"
+#endif
+
 Zen::Results Zen::Finder::operator()()
 {
-    return WinFind{}.Find();
+    return OS(Finder){}.Find();
 }
-
-#endif
