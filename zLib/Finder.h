@@ -42,12 +42,6 @@ namespace Zen
     class ZLIB_API Finder : public IFinder
     {
     public:
-        Finder() : m_dirPath(T(".")) {}
-        explicit Finder(const std::tstring& path) : m_dirPath(path) {}
-
         Results operator()();
-
-    private:
-        std::tstring m_dirPath;
     };
 }

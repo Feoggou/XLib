@@ -14,26 +14,19 @@
 *  limitations under the License.
 */
 
-
+#pragma once
 
 #include "Finder.h"
 
-#ifdef __linux__
-#include "LinuxFinder.h"
-
-Zen::Results Zen::Finder::operator()()
-{
-    return LinuxFinder{}.Find();
-}
-
-#else
-
-#include "XWin.h"
-#include "WinFinder.h"
-
-Zen::Results Zen::Finder::operator()()
-{
-    return WinFind{}.Find();
-}
-
+#if !__linux__
+#error This file must be included only on Linux!
 #endif
+
+namespace Zen
+{
+    class LinuxFinder
+    {
+    public:
+        static Results Find();
+    };
+}
